@@ -42,7 +42,7 @@ services:
       KEYCLOAK_DB_DATABASE : keycloak-sapere
       KEYCLOAK_DB_PASSWORD : Tumlab2022*
       KEYCLOAK_DB_PORT : 5432
-      KEYCLOAK_DB_USER : keycloak-regional
+      KEYCLOAK_DB_USER : postgres
       KEYCLOAK_ID : 3996c808-3e61-4f03-bdbe-98a8ebc16f7d
       KEYCLOAK_PASSWORD : password
       KEYCLOAK_REALM : ecosistema-auth
