@@ -58,7 +58,7 @@ services:
       STORAGE_SECRET_KEY : TshR630gQh
       STORAGE_USE_SSL : true
       SUPPORT_EMAIL : soporte.gestionpedagogica@avefenix.edu.co
-      WEB_LOGIN : https://sapereaudevalle.com/login
+      WEB_LOGIN : http://tumlab.local:3003/login
       WEB_SUPPORT : https://soporte.gestionpedagogica.avefenix.edu.co
     ports:
       - "4010:3000"
