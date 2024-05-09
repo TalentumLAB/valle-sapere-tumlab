@@ -1,0 +1,112 @@
+version: '3.8'
+
+services:
+  sapere-front:
+    image: vallelabs/sapere-frontend:0.10.2rc1
+    container_name: sapere-front
+    restart: always
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      - "tumlab.local:192.168.4.1"
+    environment:
+      NEXT_PUBLIC_API_URL : http://tumlab.local:4010
+      NEXT_PUBLIC_TEMPLATE_CREATE : http://tumlab.local:4010/templates/create-users
+    ports:
+      - "3003:3000"
+    networks:
+      - valle-sapere-net
+
+  sapere-back:
+    image: vallelabs/sapere-backend:0.5.9
+    container_name: sapere-back
+    restart: always
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      - "tumlab.local:192.168.4.1"
+    environment:
+      BACKEND_URL : http://tumlab.local:4010
+      DB_DATABASE : sapere
+      DB_HOST : host.docker.internal
+      DB_PASSWORD : Tumlab2022*
+      DB_PORT : 3306
+      DB_USER : root
+      EMAIL_FROM : ecosistema.canvas@talentum.edu.co
+      EMAIL_HOST : smtp.gmail.com
+      EMAIL_PASSWORD : EduCanvas*.2023
+      EMAIL_PORT : 587
+      EMAIL_SECURE : false
+      EMAIL_USER : ecosistema.canvas@talentum.edu.co
+      KEYCLOAK_AUTH_SERVER_URL : http://tumlab.local:8079/auth
+      KEYCLOAK_CLIENT_ID : sapere-client
+      KEYCLOAK_DB_ADDR : host.docker.internal
+      KEYCLOAK_DB_DATABASE : keycloak-sapere
+      KEYCLOAK_DB_PASSWORD : Tumlab2022*
+      KEYCLOAK_DB_PORT : 5432
+      KEYCLOAK_DB_USER : keycloak-regional
+      KEYCLOAK_ID : 3996c808-3e61-4f03-bdbe-98a8ebc16f7d
+      KEYCLOAK_PASSWORD : password
+      KEYCLOAK_REALM : ecosistema-auth
+      KEYCLOAK_SECRET : 83c720e5-b14d-4322-b4a1-61043d7d6cca
+      KEYCLOAK_USER : admin
+      NODE_ENV : prod
+      PORT : 3000
+      STORAGE_ACCESS_KEY : admin
+      STORAGE_API_ENDPOINT : api-minio.talentum.edu.co
+      STORAGE_BUCKET_NAME : sapere-bucket
+      STORAGE_IS_ENABLED : true
+      STORAGE_PORT : 443
+      STORAGE_SECRET_KEY : TshR630gQh
+      STORAGE_USE_SSL : true
+      SUPPORT_EMAIL : soporte.gestionpedagogica@avefenix.edu.co
+      WEB_LOGIN : https://sapereaudevalle.com/login
+      WEB_SUPPORT : https://soporte.gestionpedagogica.avefenix.edu.co
+    ports:
+      - "4010:3000"
+    networks:
+      - valle-sapere-net
+  keycloak:
+    image: docker.io/bitnami/keycloak:20
+    container_name: sapere_keycloak
+    restart: always
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      - "tumlab.local:192.168.4.1"
+    environment:
+      KEYCLOAK_CREATE_ADMIN_USER: true
+      KEYCLOAK_ADMIN_USER: admin
+      KEYCLOAK_ADMIN_PASSWORD: password
+      KEYCLOAK_MANAGEMENT_USER: manager
+      KEYCLOAK_MANAGEMENT_PASSWORD: password
+      KEYCLOAK_DATABASE_HOST: host.docker.internal
+      KEYCLOAK_DATABASE_PORT: 5432
+      KEYCLOAK_DATABASE_NAME: keycloaksapere
+      KEYCLOAK_DATABASE_USER: postgres
+      KEYCLOAK_DATABASE_PASSWORD: Tumlab2022*
+      KEYCLOAK_DATABASE_SCHEMA: public
+      KEYCLOAK_HTTP_PORT: 8080
+      KEYCLOAK_HTTPS_PORT: 8443
+      KEYCLOAK_BIND_ADDRESS: 0.0.0.0
+      KEYCLOAK_ENABLE_STATISTICS: true
+      KEYCLOAK_PRODUCTION: false
+      KC_HTTP_RELATIVE_PATH: "/auth"
+      KEYCLOAK_LOG_LEVEL: INFO
+    ports:
+      - 8079:8080
+    networks:
+      - valle-sapere-net
+
+  sapere-game:
+    image: vallelabs/sapere-game:2.5.6
+    container_name: sapere-game
+    restart: always
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      - "tumlab.local:192.168.4.1"
+    ports:
+      - "2999:80"
+    networks:
+      - valle-sapere-net
+
+networks:
+  valle-sapere-net:
+    driver: bridge
