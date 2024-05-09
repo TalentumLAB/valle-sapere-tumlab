@@ -39,7 +39,7 @@ services:
       KEYCLOAK_AUTH_SERVER_URL : http://tumlab.local:8079/auth
       KEYCLOAK_CLIENT_ID : sapere-client
       KEYCLOAK_DB_ADDR : host.docker.internal
-      KEYCLOAK_DB_DATABASE : keycloak-sapere
+      KEYCLOAK_DB_DATABASE : keycloaksapere
       KEYCLOAK_DB_PASSWORD : Tumlab2022*
       KEYCLOAK_DB_PORT : 5432
       KEYCLOAK_DB_USER : postgres
