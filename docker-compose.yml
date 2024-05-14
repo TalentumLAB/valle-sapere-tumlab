@@ -96,7 +96,7 @@ services:
       - valle-sapere-net
 
   sapere-game:
-    image: vallelabs/sapere-game:2.5.6
+    image: vallelabs/sapere-game:2.5.7
     container_name: sapere-game
     restart: always
     extra_hosts:
