@@ -17,7 +17,7 @@ services:
       - valle-sapere-net
 
   sapere-back:
-    image: vallelabs/sapere-backend:0.5.9
+    image: vallelabs/sapere-backend:0.6.1
     container_name: sapere-back
     restart: always
     extra_hosts:
