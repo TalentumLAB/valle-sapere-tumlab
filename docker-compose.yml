@@ -23,43 +23,8 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
       - "tumlab.local:192.168.4.1"
-    environment:
-      BACKEND_URL : http://tumlab.local:4010
-      DB_DATABASE : sapere
-      DB_HOST : host.docker.internal
-      DB_PASSWORD : Tumlab2022*
-      DB_PORT : 3306
-      DB_USER : root
-      EMAIL_FROM : ecosistema.canvas@talentum.edu.co
-      EMAIL_HOST : smtp.gmail.com
-      EMAIL_PASSWORD : EduCanvas*.2023
-      EMAIL_PORT : 587
-      EMAIL_SECURE : false
-      EMAIL_USER : ecosistema.canvas@talentum.edu.co
-      KEYCLOAK_AUTH_SERVER_URL : http://tumlab.local:8079/auth
-      KEYCLOAK_CLIENT_ID : sapere-client
-      KEYCLOAK_DB_ADDR : host.docker.internal
-      KEYCLOAK_DB_DATABASE : keycloaksapere
-      KEYCLOAK_DB_PASSWORD : Tumlab2022*
-      KEYCLOAK_DB_PORT : 5432
-      KEYCLOAK_DB_USER : postgres
-      KEYCLOAK_ID : 3996c808-3e61-4f03-bdbe-98a8ebc16f7d
-      KEYCLOAK_PASSWORD : password
-      KEYCLOAK_REALM : ecosistema-auth
-      KEYCLOAK_SECRET : 83c720e5-b14d-4322-b4a1-61043d7d6cca
-      KEYCLOAK_USER : admin
-      NODE_ENV : prod
-      PORT : 3000
-      STORAGE_ACCESS_KEY : admin
-      STORAGE_API_ENDPOINT : api-minio.talentum.edu.co
-      STORAGE_BUCKET_NAME : sapere-bucket
-      STORAGE_IS_ENABLED : true
-      STORAGE_PORT : 443
-      STORAGE_SECRET_KEY : TshR630gQh
-      STORAGE_USE_SSL : true
-      SUPPORT_EMAIL : soporte.gestionpedagogica@avefenix.edu.co
-      WEB_LOGIN : http://tumlab.local:3003/login
-      WEB_SUPPORT : https://soporte.gestionpedagogica.avefenix.edu.co
+    env_file:
+      - /tumlab/apps/envs/.env-sapere-back
     ports:
       - "4010:3000"
     networks:
